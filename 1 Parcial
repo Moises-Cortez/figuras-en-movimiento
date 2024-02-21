@@ -1,0 +1,66 @@
+// Definimos las variables para las posiciones y velocidades de las figuras
+float posX1, posY1; // Posición de la primera figura
+float posX2, posY2; // Posición de la segunda figura
+float velX1, velY1; // Velocidad de la primera figura
+float velX2, velY2; // Velocidad de la segunda figura
+
+void setup() {
+  size(400, 400); // Tamaño del lienzo
+  posX1 = width/4; // Posición inicial de la primera figura
+  posY1 = height/2;
+  posX2 = 3*width/4; // Posición inicial de la segunda figura
+  posY2 = height/2;
+  velX1 = 2; // Velocidad inicial de la primera figura
+  velY1 = 1;
+  velX2 = -2; // Velocidad inicial de la segunda figura
+  velY2 = -1;
+}
+
+void draw() {
+  background(255); // Limpiamos el fondo en cada fotograma
+
+  // Dibujamos las figuras
+  rect(posX1, posY1, 50, 50); // Primera figura
+  ellipse(posX2, posY2, 50, 50); // Segunda figura
+
+  // Actualizamos las posiciones de las figuras según sus velocidades
+  posX1 += velX1;
+  posY1 += velY1;
+  posX2 += velX2;
+  posY2 += velY2;
+
+  // Control de bordes: rebote de las figuras
+  if (posX1 <= 0 || posX1 >= width - 50) {
+    velX1 *= -1;
+  }
+  if (posY1 <= 0 || posY1 >= height - 50) {
+    velY1 *= -1;
+  }
+  if (posX2 <= 0 || posX2 >= width - 25) {
+    velX2 *= -1;
+  }
+  if (posY2 <= 0 || posY2 >= height - 25) {
+    velY2 *= -1;
+  }
+}
+
+void keyPressed() {
+  // Control de la velocidad de las figuras con las teclas 'w', 'a', 's' y 'd'
+  if (key == 'w') {
+    velY1 -= 0.5;
+  } else if (key == 's') {
+    velY1 += 0.5;
+  } else if (key == 'a') {
+    velX1 -= 0.5;
+  } else if (key == 'd') {
+    velX1 += 0.5;
+  } else if (key == 'i') {
+    velY2 -= 0.5;
+  } else if (key == 'k') {
+    velY2 += 0.5;
+  } else if (key == 'j') {
+    velX2 -= 0.5;
+  } else if (key == 'l') {
+    velX2 += 0.5;
+  }
+}
